@@ -262,7 +262,7 @@
   function configurarQrValidacion() {
     if (!dom.qrValidacion || !dom.qrValidacionLink) return;
 
-    const urlValidacion = new URL("validacion.html?codigo=20251105", window.location.href).href;
+    const urlValidacion = "https://yeferrodriguez2-gif.github.io/carnet-digital/validacion.html?codigo=20251105";
     const qrApi = new URL("https://api.qrserver.com/v1/create-qr-code/");
     qrApi.searchParams.set("size", "180x180");
     qrApi.searchParams.set("data", urlValidacion);
