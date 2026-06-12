@@ -952,6 +952,7 @@ body.portal-activo .login {
   margin-bottom: 8px;
 }
 
+.carnet--frente .qr-image,
 .carnet--frente .qr-svg {
   max-width: 122px;
 }
@@ -1818,7 +1819,7 @@ body.modo-oscuro .notif-item small {
 
   .carnet-flip {
     max-width: 92vw;
-    height: 545px;
+    height: 600px;
   }
 
   .carnet {
@@ -1859,6 +1860,7 @@ body.modo-oscuro .notif-item small {
     margin-bottom: 0;
   }
 
+  .carnet--frente .qr-image,
   .carnet--frente .qr-svg {
     max-width: 108px;
   }
