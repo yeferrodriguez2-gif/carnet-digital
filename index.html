@@ -1,0 +1,504 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UWallet - Carnet Digital</title>
+
+  <!-- Iconos del proyecto -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Estilos principales -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Loader inicial -->
+  <div id="loader" class="loader" aria-live="polite">
+    <div class="loader__contenido">
+      <img src="imagen/logo-u.svg" alt="Logo UWallet" class="loader__logo">
+      <p>Cargando carnet digital</p>
+      <span class="loader__linea"></span>
+    </div>
+  </div>
+
+  <!-- Login -->
+  <section id="login" class="login" aria-label="Inicio de sesión">
+    <form id="formLogin" class="login__tarjeta">
+      <div class="login__marca">
+        <img src="imagen/logo-u.svg" alt="Logo UWallet">
+        <h1>UWallet</h1>
+        <p>Portal Estudiantil · Uniminuto</p>
+      </div>
+
+      <label class="campo-login" for="usuarioLogin">
+        <i class="fa-solid fa-user" aria-hidden="true"></i>
+        <input id="usuarioLogin" type="text" placeholder="Código estudiantil" autocomplete="username" inputmode="numeric" required>
+      </label>
+
+      <label class="campo-login" for="passwordLogin">
+        <i class="fa-solid fa-lock" aria-hidden="true"></i>
+        <input id="passwordLogin" type="password" placeholder="Contraseña" autocomplete="current-password" required>
+        <button id="togglePassword" class="campo-login__toggle" type="button" aria-label="Mostrar contraseña">
+          <i class="fa-solid fa-eye" aria-hidden="true"></i>
+        </button>
+      </label>
+
+      <button class="boton" type="submit">Ingresar</button>
+
+      <p id="mensajeLogin" class="login__error">
+        <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+        Usuario o contraseña incorrectos
+      </p>
+
+      <small>Solo para uso personal · UWallet 2026</small>
+    </form>
+  </section>
+
+  <!-- Header institucional -->
+  <header class="header-institucional">
+    <div class="header-institucional__logo">
+      <img src="imagen/logo-uniminuto.svg" alt="Logo institucional Uniminuto">
+    </div>
+
+    <div class="header-institucional__contenido">
+      <div class="header-app" aria-label="UWallet">
+        <img src="imagen/logo-u.svg" alt="Logo UWallet">
+        <span>UWallet</span>
+      </div>
+
+      <h2>Portal de Servicios Estudiantiles</h2>
+
+      <nav class="header-institucional__nav" aria-label="Navegación principal">
+        <div class="notif">
+          <button id="btnNotificaciones" class="header-icono" type="button" aria-label="Ver notificaciones" aria-controls="notifDropdown" aria-expanded="false">
+            <i class="fa-solid fa-bell" aria-hidden="true"></i>
+            <span id="badgeNotificaciones" class="notif-badge">3</span>
+          </button>
+
+          <div id="notifDropdown" class="notif-dropdown" aria-label="Notificaciones">
+            <div class="notif-dropdown__header">
+              <strong>Notificaciones</strong>
+              <button id="marcarLeidas" type="button">Marcar todo leído</button>
+            </div>
+
+            <div class="notif-lista">
+              <article class="notif-item notif-item--exito">
+                <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+                <div>
+                  <strong>Matrícula 2026-1 confirmada</strong>
+                  <p>Tu proceso de matrícula fue exitoso</p>
+                  <small>Hace 2 días</small>
+                </div>
+              </article>
+
+              <article class="notif-item notif-item--alerta">
+                <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+                <div>
+                  <strong>Parcial de Bases de Datos</strong>
+                  <p>Recuerda: examen el viernes 16 <br> de mayo</p>
+                  <small>Hace 3 horas</small>
+                </div>
+              </article>
+
+              <article class="notif-item notif-item--info">
+                <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                <div>
+                  <strong>Nuevo comunicado</strong>
+                  <p>Bienestar informa: semana de salud <br> mental</p>
+                  <small>Hace 1 día</small>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <button id="toggleTema" class="header-icono" type="button" aria-label="Cambiar tema">
+          <i class="fa-solid fa-moon" aria-hidden="true"></i>
+        </button>
+
+        <a href="#" class="nav-accion" data-modal="modal-horario"><i class="fa-solid fa-calendar-days"></i> Ver Horario</a>
+        <a href="#" class="nav-accion" data-modal="modal-notas"><i class="fa-solid fa-graduation-cap"></i> Ver Notas</a>
+        <a href="#" class="nav-accion" data-modal="modal-historial"><i class="fa-solid fa-chart-line"></i> Mi Historial</a>
+        <a href="#" id="abrirPerfil"><i class="fa-solid fa-circle-user"></i> Mi Perfil</a>
+        <a href="#" id="abrirLogout"><i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión</a>
+
+        <button id="abrirDrawer" class="header-icono header-menu" type="button" aria-label="Abrir menú" aria-controls="drawer" aria-expanded="false">
+          <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Menú lateral móvil -->
+  <div id="drawerOverlay" class="drawer-overlay"></div>
+  <aside id="drawer" class="drawer" aria-label="Menú móvil">
+    <button id="cerrarDrawer" class="drawer__cerrar" type="button" aria-label="Cerrar menú">
+      <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+    </button>
+    <a href="#" id="drawerPerfil"><i class="fa-solid fa-circle-user"></i> Mi Perfil</a>
+    <a href="#" class="nav-accion" data-modal="modal-horario"><i class="fa-solid fa-calendar-days"></i> Ver Horario</a>
+    <a href="#" class="nav-accion" data-modal="modal-notas"><i class="fa-solid fa-graduation-cap"></i> Ver Notas</a>
+    <a href="#" class="nav-accion" data-modal="modal-historial"><i class="fa-solid fa-chart-line"></i> Mi Historial</a>
+    <a href="#" id="drawerLogout"><i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión</a>
+  </aside>
+
+  <!-- Contenido principal -->
+  <main class="pantalla">
+    <section class="portal-estudiante" aria-label="Resumen del portal estudiantil">
+      <aside class="panel-estudiante panel-estudiante--izquierdo panel-estudiante--plegable" aria-label="Resumen académico" data-panel-mobile>
+        <button class="panel-estudiante__toggle" type="button" aria-expanded="false" aria-controls="panelResumenContenido" data-panel-toggle>
+          <span class="panel-estudiante__encabezado panel-estudiante__encabezado--compacto">
+            <span class="panel-estudiante__icono"><i class="fa-solid fa-layer-group"></i></span>
+            <span class="panel-estudiante__titulos">
+              <span class="panel-estudiante__eyebrow">Resumen académico</span>
+              <span class="panel-estudiante__title">IV Semestre</span>
+            </span>
+          </span>
+          <span class="panel-estudiante__chevron" aria-hidden="true"><i class="fa-solid fa-angle-down"></i></span>
+        </button>
+
+        <div id="panelResumenContenido" class="panel-estudiante__contenido" data-panel-content>
+          <div class="dashboard-metricas dashboard-metricas--movil">
+            <article class="dashboard-card">
+              <div class="dashboard-card__contenido">
+                <span>Próxima clase</span>
+                <strong>Desarrollo Web</strong>
+                <small>Jueves · 7:00am</small>
+              </div>
+            </article>
+
+            <article class="dashboard-card">
+              <div class="dashboard-card__contenido">
+                <span>Promedio</span>
+                <strong>4.12</strong>
+                <small>Semestre actual</small>
+              </div>
+            </article>
+
+            <article class="dashboard-card">
+              <div class="dashboard-card__contenido">
+                <span>Créditos</span>
+                <strong>18</strong>
+                <small>En curso</small>
+              </div>
+            </article>
+          </div>
+        </div>
+      </aside>
+
+      <div class="carnet-flip">
+        <div id="carnetInner" class="carnet-flip__inner">
+          <!-- Frente del carnet -->
+          <section class="carnet carnet--frente" aria-label="Carnet digital frente">
+            <div class="carnet__encabezado">
+              <div>
+                <p class="carnet__etiqueta">Carnet digital</p>
+                <h1>Universidad Uniminuto</h1>
+              </div>
+              <span class="carnet__estado">Activo</span>
+            </div>
+
+            <div class="perfil">
+              <img src="imagen/fotoPerfil.jpeg" alt="Foto de perfil del estudiante" class="perfil__foto">
+              <div class="perfil__datos">
+                <h2 id="nombreEstudiante">Darwin Suarez</h2>
+                <p id="programaEstudiante">Ingeniería de Software</p>
+              </div>
+            </div>
+
+            <div class="chips-estado" aria-label="Estado del estudiante">
+              <span><i class="fa-solid fa-circle-check"></i> Verificado</span>
+              <span><i class="fa-solid fa-calendar-check"></i> 2026-1</span>
+            </div>
+
+            <div class="datos">
+              <div class="dato">
+                <span>Código</span>
+                <strong id="codigoEstudiante">20251105</strong>
+              </div>
+              <div class="dato">
+                <span>Rol</span>
+                <strong>Estudiante</strong>
+              </div>
+            </div>
+
+            <div class="qr">
+              <div class="qr__encabezado">
+                <p>Código QR de acceso</p>
+                <span><i class="fa-solid fa-shield-halved"></i> Acceso verificado</span>
+              </div>
+              <a id="qrValidacionLink" class="qr-link" href="validacion.html?codigo=20251105" aria-label="Abrir validación simulada del carnet">
+                <img id="qrValidacion" class="qr-image" src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=validacion.html%3Fcodigo%3D20251105" alt="QR de validación del carnet">
+              </a>
+            </div>
+
+            <button class="boton-flip" type="button" data-voltear-carnet>Voltear carnet</button>
+          </section>
+
+          <!-- Reverso del carnet -->
+          <section class="carnet carnet--reverso" aria-label="Carnet digital reverso">
+            <div class="reverso-marca">
+              <img src="imagen/logo-u.svg" alt="Logo UWallet">
+              <h2>UWallet</h2>
+            </div>
+
+            <div class="separador"></div>
+
+            <div id="codigoBarras" class="codigo-barras" aria-hidden="true"></div>
+            <p class="codigo-barras__numero">20251105</p>
+
+            <div class="datos datos-reverso">
+              <div class="dato"><span>Emisión</span><strong>01/02/2025</strong></div>
+              <div class="dato"><span>Vence</span><strong>01/02/2026</strong></div>
+              <div class="dato"><span>Tipo</span><strong>Pregrado</strong></div>
+              <div class="dato"><span>Campus</span><strong>Bogotá</strong></div>
+            </div>
+
+            <p class="texto-legal">
+              Este documento es personal e intransferible. Universidad Uniminuto · NIT 860.071.256-1
+            </p>
+
+            <button class="boton-flip" type="button" data-voltear-carnet>Voltear carnet</button>
+          </section>
+        </div>
+      </div>
+
+      <aside class="panel-estudiante panel-estudiante--derecho panel-estudiante--plegable" aria-label="Actividad reciente" data-panel-mobile>
+        <button class="panel-estudiante__toggle" type="button" aria-expanded="false" aria-controls="panelActividadContenido" data-panel-toggle>
+          <span class="panel-estudiante__encabezado panel-estudiante__encabezado--compacto">
+            <span class="panel-estudiante__icono"><i class="fa-solid fa-bolt"></i></span>
+            <span class="panel-estudiante__titulos">
+              <span class="panel-estudiante__eyebrow">Actividad reciente</span>
+              <span class="panel-estudiante__title">UWallet al día</span>
+            </span>
+          </span>
+          <span class="panel-estudiante__chevron" aria-hidden="true"><i class="fa-solid fa-angle-down"></i></span>
+        </button>
+
+        <div id="panelActividadContenido" class="panel-estudiante__contenido" data-panel-content>
+          <div class="actividad-lista actividad-lista--movil">
+            <article class="actividad-item">
+              <i class="fa-solid fa-circle-check"></i>
+              <div class="actividad-item__contenido">
+                <strong>Último ingreso</strong>
+                <span>Hoy, 9:55 a.m.</span>
+              </div>
+            </article>
+
+            <article class="actividad-item">
+              <i class="fa-solid fa-id-card"></i>
+              <div class="actividad-item__contenido">
+                <strong>Última verificación</strong>
+                <span>Carnet activo</span>
+              </div>
+            </article>
+
+            <article class="actividad-item">
+              <i class="fa-solid fa-book-open"></i>
+              <div class="actividad-item__contenido">
+                <strong>Sistema</strong>
+                <span>UWallet académico</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <!-- Footer institucional -->
+  <footer class="footer-institucional">
+    <div class="footer-institucional__contenido">
+      <p class="footer-marca">
+        <img src="imagen/logo-uniminuto.svg" alt="Logo Uniminuto">
+        <span>2026 &copy; by UNIMINUTO</span>
+      </p>
+
+      <nav class="footer-institucional__enlaces" aria-label="Enlaces institucionales">
+        <a href="#" id="abrirSoporte">Soporte tecnológico</a>
+        <a href="#" id="abrirPortal">Portal Uniminuto</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- Overlay único para modales -->
+  <div id="overlay" class="overlay"></div>
+
+  <!-- Modales -->
+  <section id="modal-perfil" class="modal">
+    <button class="modal__cerrar" type="button" data-cerrar-modal><i class="fa-solid fa-xmark"></i></button>
+    <h2 class="modal__titulo"><i class="fa-solid fa-circle-user"></i> Mi Perfil</h2>
+
+    <div class="perfil-modal-final">
+      <img src="imagen/fotoPerfil.jpeg" alt="Foto de Darwin Suarez">
+      <h2>Darwin Suarez</h2>
+      <span class="carnet__estado">Activo</span>
+    </div>
+
+    <div class="separador"></div>
+
+    <div class="perfil-grid">
+      <div class="dato"><span><i class="fa-solid fa-id-card"></i> Código</span><strong>20251105</strong></div>
+      <div class="dato"><span><i class="fa-solid fa-book-open"></i> Programa</span><strong>Ing. de Software</strong></div>
+      <div class="dato"><span><i class="fa-solid fa-layer-group"></i> Semestre</span><strong>IV</strong></div>
+      <div class="dato"><span><i class="fa-solid fa-user-tag"></i> Rol</span><strong>Estudiante</strong></div>
+      <div class="dato dato--ancho"><span><i class="fa-solid fa-envelope"></i> Correo</span><strong>darwin.suarez@uniminuto.edu.co</strong></div>
+      <div class="dato dato--ancho"><span><i class="fa-solid fa-building-columns"></i> Universidad</span><strong>Uniminuto</strong></div>
+    </div>
+  </section>
+
+  <section id="modal-horario" class="modal modal--grande">
+    <button class="modal__cerrar" type="button" data-cerrar-modal><i class="fa-solid fa-xmark"></i></button>
+    <h2 class="modal__titulo"><i class="fa-solid fa-calendar-days"></i> Horario de Clases</h2>
+    <p class="modal-subtitulo">IV Semestre · 2026-1</p>
+
+    <div class="tabla-responsive">
+      <table class="tabla-portal">
+        <thead>
+          <tr><th>Día</th><th>Materia</th><th>Horario</th><th>Salón</th><th>Docente</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Lunes</td><td>Cálculo Diferencial</td><td>7:00 - 9:00am</td><td>B-201</td><td>Dr. Ramírez</td></tr>
+          <tr><td>Lunes</td><td>Programación Orientada a Objetos</td><td>9:00 - 11:00am</td><td>C-105</td><td>Ing. Torres</td></tr>
+          <tr><td>Martes</td><td>Bases de Datos I</td><td>7:00 - 9:00am</td><td>B-304</td><td>Ing. Gómez</td></tr>
+          <tr><td>Martes</td><td>Inglés Técnico</td><td>2:00 - 4:00pm</td><td>A-102</td><td>Prof. Smith</td></tr>
+          <tr><td>Miércoles</td><td>Estructuras de Datos</td><td>9:00 - 11:00am</td><td>C-210</td><td>Ing. Torres</td></tr>
+          <tr><td>Jueves</td><td>Desarrollo Web</td><td>7:00 - 9:00am</td><td>Lab-1</td><td>Ing. Peña</td></tr>
+          <tr><td>Viernes</td><td>Proyecto Integrador</td><td>2:00 - 5:00pm</td><td>B-401</td><td>Ing. Gómez</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="total-creditos">Total: 18 créditos</p>
+  </section>
+
+  <section id="modal-notas" class="modal modal--grande">
+    <button class="modal__cerrar" type="button" data-cerrar-modal><i class="fa-solid fa-xmark"></i></button>
+    <h2 class="modal__titulo"><i class="fa-solid fa-graduation-cap"></i> Mis Notas</h2>
+    <p class="modal-subtitulo">IV Semestre · 2026-1</p>
+
+    <div class="tabla-responsive">
+      <table class="tabla-portal tabla -notas">
+        <thead>
+          <tr><th>Materia</th><th>Créditos</th><th>Parcial 1</th><th>Parcial 2</th><th>Final</th><th>Definitiva</th><th>Estado</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Cálculo Diferencial</td><td>3</td><td class="nota">3.5</td><td class="nota">3.8</td><td class="nota">4.0</td><td class="nota">3.77</td><td><span class="estado estado--en-curso">En curso</span></td></tr>
+          <tr><td>Programación Orientada a Objetos</td><td>3</td><td class="nota">4.2</td><td class="nota">4.5</td><td>-</td><td class="nota">4.35</td><td><span class="estado estado--en-curso">En curso</span></td></tr>
+          <tr><td>Bases de Datos I</td><td>3</td><td class="nota">3.8</td><td class="nota">4.0</td><td>-</td><td class="nota">3.90</td><td><span class="estado estado--en-curso">En curso</span></td></tr>
+          <tr><td>Inglés Técnico</td><td>2</td><td class="nota">4.5</td><td class="nota">4.8</td><td>-</td><td class="nota">4.65</td><td><span class="estado estado--en-curso">En curso</span></td></tr>
+          <tr><td>Estructuras de Datos</td><td>3</td><td class="nota">3.3</td><td class="nota">3.6</td><td>-</td><td class="nota">3.45</td><td><span class="estado estado--en-curso">En curso</span></td></tr>
+          <tr><td>Desarrollo Web</td><td>2</td><td class="nota">4.8</td><td>-</td><td>-</td><td class="nota">4.80</td><td><span class="estado estado--en-curso">En curso</span></td></tr>
+          <tr><td>Proyecto Integrador</td><td>2</td><td class="nota">3.9</td><td>-</td><td>-</td><td class="nota">3.90</td><td><span class="estado estado--en-curso">En curso</span></td></tr>
+        </tbody>
+        <tfoot>
+          <tr><td colspan="7">Promedio semestral: 4.12 · Créditos cursados: 18</td></tr>
+        </tfoot>
+      </table>
+    </div>
+  </section>
+
+  <section id="modal-historial" class="modal modal--grande">
+    <button class="modal__cerrar" type="button" data-cerrar-modal><i class="fa-solid fa-xmark"></i></button>
+    <h2 class="modal__titulo"><i class="fa-solid fa-chart-line"></i> Historial Académico</h2>
+
+    <div class="metricas-historial">
+      <div class="dato"><span>Promedio acumulado</span><strong>3.94</strong></div>
+      <div class="dato"><span>Créditos aprobados</span><strong>54 de 164</strong></div>
+      <div class="dato"><span>Semestres cursados</span><strong>4 de 10</strong></div>
+    </div>
+
+    <div class="avance">
+      <p>Avance hacia el grado: 32.9%</p>
+      <div class="avance__barra"><span id="barraAvance"></span></div>
+    </div>
+
+    <div class="tabla-responsive">
+      <table class="tabla-portal">
+        <thead>
+          <tr><th>Semestre</th><th>Materias</th><th>Créditos</th><th>Promedio</th><th>Estado</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>2024-2</td><td>6</td><td>18</td><td>3.85</td><td><span class="estado estado--aprobado">Aprobado</span></td></tr>
+          <tr><td>2025-1</td><td>6</td><td>18</td><td>3.90</td><td><span class="estado estado--aprobado">Aprobado</span></td></tr>
+          <tr><td>2025-2</td><td>6</td><td>18</td><td>4.05</td><td><span class="estado estado--aprobado">Aprobado</span></td></tr>
+          <tr><td>2026-1</td><td>7</td><td>18</td><td>4.12</td><td><span class="estado estado--en-curso">En curso</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="modal-logout" class="modal modal--pequeno">
+    <button class="modal__cerrar" type="button" data-cerrar-modal><i class="fa-solid fa-xmark"></i></button>
+    <h2 class="modal__titulo"><i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión</h2>
+    <div class="logout-confirmacion">
+      <i class="fa-solid fa-circle-question"></i>
+      <p>¿Seguro que deseas cerrar sesión de UWallet?</p>
+    </div>
+    <div class="acciones-modal">
+      <button class="boton-outline" type="button" data-cerrar-modal>Cancelar</button>
+      <button id="confirmarLogout" class="boton" type="button">Cerrar sesión</button>
+    </div>
+  </section>
+
+  <section id="modal-soporte" class="modal">
+    <button class="modal__cerrar" type="button" data-cerrar-modal><i class="fa-solid fa-xmark"></i></button>
+    <h2 class="modal__titulo"><i class="fa-solid fa-headset"></i> Soporte Tecnológico</h2>
+
+    <div class="dato contacto-soporte">
+      <strong><i class="fa-solid fa-envelope"></i> soporte@uniminuto.edu.co</strong>
+      <strong><i class="fa-solid fa-phone"></i> (601) 291 6520 ext. 6666</strong>
+      <strong><i class="fa-solid fa-clock"></i> Lun-Vie 7:00am - 6:00pm</strong>
+    </div>
+
+    <div class="separador"></div>
+
+    <form id="formSoporte" class="formulario-soporte">
+      <label>Nombre <input type="text" name="nombre" placeholder="Tu nombre completo"></label>
+      <label>Correo <input type="email" name="correo" placeholder="correo@ejemplo.com"></label>
+      <label>
+        Asunto
+        <select name="asunto">
+          <option value="">Selecciona una opción</option>
+          <option>Problema técnico</option>
+          <option>Acceso al sistema</option>
+          <option>Carnet digital</option>
+          <option>Otro</option>
+        </select>
+      </label>
+      <label>Descripción <textarea name="descripcion" rows="4" placeholder="Describe tu problema..."></textarea></label>
+      <button class="boton" type="submit"><i class="fa-solid fa-paper-plane"></i> Enviar solicitud</button>
+    </form>
+
+    <div id="soporteExito" class="soporte-exito">
+      <i class="fa-solid fa-circle-check"></i>
+      <h3>¡Solicitud enviada correctamente!</h3>
+      <p>Nuestro equipo te contactará en menos de 24 horas.</p>
+      <button class="boton" type="button" data-cerrar-modal>Cerrar</button>
+    </div>
+  </section>
+
+  <section id="modal-portal" class="modal">
+    <button class="modal__cerrar" type="button" data-cerrar-modal><i class="fa-solid fa-xmark"></i></button>
+    <h2 class="modal__titulo"><i class="fa-solid fa-building-columns"></i> Portal Uniminuto</h2>
+
+    <div class="portal-logo">
+      <img src="imagen/logo-uniminuto.svg" alt="Logo Uniminuto">
+    </div>
+
+    <div class="separador"></div>
+
+    <div class="portal-accesos">
+      <a href="#"><i class="fa-solid fa-book"></i><span>Biblioteca Virtual</span></a>
+      <a href="#"><i class="fa-solid fa-laptop"></i><span>Aula Virtual (Moodle)</span></a>
+      <a href="#"><i class="fa-solid fa-heart"></i><span>Bienestar Universitario</span></a>
+      <a href="#"><i class="fa-solid fa-file-lines"></i><span>Registro y Control</span></a>
+      <a href="#"><i class="fa-solid fa-envelope-open-text"></i><span>Correo Institucional</span></a>
+      <a href="#"><i class="fa-solid fa-calendar-check"></i><span>Agenda Cultural</span></a>
+    </div>
+  </section>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
+

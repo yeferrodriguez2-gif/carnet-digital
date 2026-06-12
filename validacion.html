@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UWallet - Validación de Carnet</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      min-height: 100vh;
+    }
+
+    .validacion-page {
+      flex: 1;
+      width: 100%;
+      display: grid;
+      place-items: center;
+      padding: clamp(24px, 5vw, 48px);
+    }
+
+    .validacion-card {
+      position: relative;
+      width: min(100%, 720px);
+      overflow: hidden;
+      padding: clamp(22px, 4vw, 34px);
+      border-radius: 28px;
+      color: var(--color-text);
+      background: var(--color-card);
+      box-shadow: var(--sombra-azul);
+    }
+
+    .validacion-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 8px;
+      background: linear-gradient(90deg, var(--azul-principal), var(--azul-claro), var(--fondo));
+    }
+
+    .validacion-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .validacion-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .validacion-brand img {
+      width: 54px;
+      height: 54px;
+    }
+
+    .validacion-brand span {
+      display: block;
+      color: var(--azul-secundario);
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .validacion-brand h1 {
+      margin: 0;
+      color: var(--azul-principal);
+      font-size: clamp(22px, 4vw, 32px);
+      line-height: 1.1;
+    }
+
+    .validacion-estado {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: var(--azul-principal);
+      background: rgba(77, 168, 218, 0.16);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .validacion-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .validacion-resultado {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px;
+      border-radius: 18px;
+      color: var(--azul-principal);
+      background: rgba(255, 204, 0, 0.2);
+      font-weight: 900;
+    }
+
+    .validacion-resultado i {
+      color: #16a34a;
+      font-size: 24px;
+    }
+
+    .validacion-acciones {
+      display: flex;
+      justify-content: center;
+      margin-top: 22px;
+    }
+
+    .validacion-acciones .boton {
+      width: auto;
+      min-width: 180px;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    @media (max-width: 560px) {
+      .validacion-header,
+      .validacion-resultado {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .validacion-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="validacion-page" aria-label="Validación simulada de carnet">
+    <section class="validacion-card">
+      <header class="validacion-header">
+        <div class="validacion-brand">
+          <img src="imagen/logo-u.svg" alt="Logo UWallet">
+          <div>
+            <span>Carnet Digital - Validación</span>
+            <h1>UWallet</h1>
+          </div>
+        </div>
+
+        <strong class="validacion-estado">
+          <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+          Activo
+        </strong>
+      </header>
+
+      <div class="validacion-grid">
+        <div class="dato"><span>Usuario</span><strong>Darwin Suarez</strong></div>
+        <div class="dato"><span>Código</span><strong>20251105</strong></div>
+        <div class="dato"><span>Programa</span><strong>Ingeniería de Software</strong></div>
+        <div class="dato"><span>Periodo</span><strong>2026-1</strong></div>
+        <div class="dato"><span>Rol</span><strong>Estudiante</strong></div>
+        <div class="dato"><span>Última actualización</span><strong>11/06/2026</strong></div>
+      </div>
+
+      <div class="validacion-resultado">
+        <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+        <span>Resultado: Carnet válido ante autoridad competente</span>
+      </div>
+
+      <div class="validacion-acciones">
+        <a class="boton" href="index.html">Volver</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
