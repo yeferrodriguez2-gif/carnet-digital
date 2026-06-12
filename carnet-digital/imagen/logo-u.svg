@@ -1,8 +1,0 @@
-<svg width="220" height="220" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="8" y="8" width="204" height="204" rx="36" fill="#FFCC00"/>
-  <ellipse cx="110" cy="98" rx="61" ry="48" fill="#FFFFFF"/>
-  <path d="M78 52C74 84 73 115 79 141C85 170 102 183 127 178C151 173 164 153 167 121C169 99 167 76 171 52" stroke="#061A40" stroke-width="18" stroke-linecap="round"/>
-  <path d="M177 47C184 62 178 72 172 80" stroke="#061A40" stroke-width="8" stroke-linecap="round"/>
-  <path d="M65 139L39 181L100 150L65 139Z" fill="#FFFFFF"/>
-  <text x="93" y="168" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="800" fill="#061A40" transform="rotate(-13 93 168)">wallet</text>
-</svg>

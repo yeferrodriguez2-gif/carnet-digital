@@ -1,9 +1,0 @@
-<svg width="360" height="150" viewBox="0 0 360 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="360" height="150" rx="24" fill="white" fill-opacity="0.86"/>
-  <line x1="52" y1="33" x2="52" y2="112" stroke="#7B8794" stroke-width="4" stroke-linecap="round"/>
-  <line x1="35" y1="72" x2="68" y2="42" stroke="#7B8794" stroke-width="4" stroke-linecap="round"/>
-  <line x1="35" y1="72" x2="70" y2="103" stroke="#7B8794" stroke-width="4" stroke-linecap="round"/>
-  <text x="88" y="67" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="800" letter-spacing="1.5" fill="#003C71">UNIMINUTO</text>
-  <text x="90" y="94" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#333333">Corporacion Universitaria</text>
-  <text x="90" y="116" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="600" fill="#005AA7">Identidad institucional</text>
-</svg>
